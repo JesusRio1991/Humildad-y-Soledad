@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Humildad y Soledad</string>
+    <string name="ultimasNoticias">NOTICIAS</string>
+    <string name="ultimasActuaciones">ACTUACIONES</string>
+    <string name="ultimasSemanaSanta">SEMANA SANTA</string>
+    <string name="verMas">Ver todas </string>
+    <string name="web">PÁGINA WEB</string>
+    <string name="actualizar">Actualizar</string>
+    <string name="title_activity_actuaciones">Actuaciones</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_semana_santa">Semana Santa</string>
+    <string name="title_activity_inicio">Inicio</string>
+    <string name="cargandoDatos">Cargando datos ...</string>
+    <string name="usoComponentes">Uso exclusivo de componentes</string>
+    <string name="title_activity_vista">Vista</string>
+    <string name="Fecha">FECHA</string>
+    <string name="Ciudad">CIUDAD</string>
+    <string name="Uniforme">UNIFORME</string>
+    <string name="Horario">HORARIO</string>
+    <string name="QuedadaR">QUEDADA EN LA RAMBLA</string>
+    <string name="QuedadaS">QUEDADA EN SANTAELLA</string>
+    <string name="title_activity_notificaciones">Notificaciones</string>
+    <string name="ultimaNoticia">ÚLTIMA NOTIFICACIÓN</string>
+
+</resources>

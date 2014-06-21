@@ -1,0 +1,190 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ECECEC"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ECECEC"
+        android:orientation="vertical"
+        android:padding="@dimen/Cinco" >
+
+        <LinearLayout
+            android:id="@+id/RelativeNoticias"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="vertical"
+            android:weightSum="1.0" >
+
+            <TextView
+                android:id="@+id/txtUltimasNoticias"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/Veinte"
+                android:layout_marginTop="@dimen/Veinte"
+                android:paddingLeft="@dimen/Veinte"
+                android:text="@string/ultimasNoticias"
+                android:textColor="#990000"
+                android:typeface="sans" />
+
+            <ListView
+                android:id="@+id/lstActuaciones"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginLeft="@dimen/Diez"
+                android:layout_marginRight="@dimen/Diez"
+                android:layout_weight="1"
+                android:background="@drawable/borderlistview"
+                android:divider="#DFDEDE"
+                android:dividerHeight="2sp"
+                android:footerDividersEnabled="true"
+                android:headerDividersEnabled="true"
+                android:scrollbarAlwaysDrawVerticalTrack="false" >
+            </ListView>
+
+            <TextView
+                android:id="@+id/verMasNoticias"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/Diez"
+                android:clickable="true"
+                android:gravity="right"
+                android:onClick="goNoticias"
+                android:text="@string/verMas"
+                android:textColor="#990000"
+                android:textSize="@dimen/doce" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/RelativeActuaciones"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="1.0" >
+
+            <TextView
+                android:id="@+id/txtUltimasActuaciones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/Veinte"
+                android:layout_marginTop="@dimen/Veinte"
+                android:paddingLeft="@dimen/Veinte"
+                android:text="@string/ultimasActuaciones"
+                android:textColor="#990000"
+                android:typeface="sans" />
+
+            <ListView
+                android:id="@+id/lstUltimasActuaciones"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginLeft="@dimen/Diez"
+                android:layout_marginRight="@dimen/Diez"
+                android:layout_weight="1"
+                android:background="@drawable/borderlistview"
+                android:divider="#DFDEDE"
+                android:dividerHeight="2sp"
+                android:footerDividersEnabled="true"
+                android:headerDividersEnabled="true"
+                android:scrollbarAlwaysDrawVerticalTrack="false" >
+            </ListView>
+
+            <TextView
+                android:id="@+id/verMasActuaciones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/Diez"
+                android:clickable="true"
+                android:gravity="right"
+                android:onClick="goActuaciones"
+                android:text="@string/verMas"
+                android:textColor="#990000"
+                android:textSize="@dimen/doce" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/RelativeSemanaSanta"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="1.0" >
+
+            <TextView
+                android:id="@+id/txtUltimasSemanaSanta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/Veinte"
+                android:layout_marginTop="@dimen/Veinte"
+                android:paddingLeft="@dimen/Veinte"
+                android:text="@string/ultimasSemanaSanta"
+                android:textColor="#990000"
+                android:typeface="sans" />
+
+            <ListView
+                android:id="@+id/lstUltimasSemanaSanta"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="@dimen/Diez"
+                android:layout_marginRight="@dimen/Diez"
+                android:layout_weight="1"
+                android:background="@drawable/borderlistview"
+                android:divider="#DFDEDE"
+                android:dividerHeight="2sp"
+                android:footerDividersEnabled="true"
+                android:headerDividersEnabled="true"
+                android:scrollbarAlwaysDrawVerticalTrack="false"
+                android:scrollbars="none" >
+            </ListView>
+
+            <TextView
+                android:id="@+id/verMasSemanaSanta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/Diez"
+                android:clickable="true"
+                android:gravity="right"
+                android:onClick="goSemanaSanta"
+                android:text="@string/verMas"
+                android:textColor="#990000"
+                android:textSize="@dimen/doce" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/RelativeTwitter"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="1.0" >
+
+            <TextView
+                android:id="@+id/txtTwitter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/Veinte"
+                android:layout_marginTop="@dimen/Veinte"
+                android:paddingLeft="@dimen/Veinte"
+                android:text="@string/web"
+                android:textColor="#990000"
+                android:typeface="sans" />
+
+            <ListView
+                android:id="@+id/lstTwitter"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="@dimen/Diez"
+                android:layout_marginRight="@dimen/Diez"
+                android:layout_weight="1"
+                android:background="@drawable/borderlistview"
+                android:divider="#DFDEDE"
+                android:dividerHeight="2sp"
+                android:footerDividersEnabled="true"
+                android:headerDividersEnabled="true"
+                android:scrollbarAlwaysDrawVerticalTrack="false"
+                android:scrollbars="none" >
+            </ListView>
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

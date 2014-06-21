@@ -1,0 +1,34 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearNoticias"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:background="#ECECEC"
+    android:orientation="vertical"
+    android:padding="@dimen/Cinco" >
+
+    <TextView
+        android:id="@+id/txtNoticias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/Veinte"
+        android:layout_marginTop="@dimen/Veinte"
+        android:paddingLeft="@dimen/Veinte"
+        android:text="@string/ultimasNoticias"
+        android:textColor="#990000"
+        android:typeface="sans" />
+
+    <ListView
+        android:id="@+id/lstNoticias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/Diez"
+        android:layout_marginRight="@dimen/Diez"
+        android:background="@drawable/borderlistview"
+        android:divider="#DFDEDE"
+        android:dividerHeight="2sp"
+        android:footerDividersEnabled="true"
+        android:headerDividersEnabled="true"
+        android:scrollbarAlwaysDrawVerticalTrack="false" >
+    </ListView>
+
+</LinearLayout>

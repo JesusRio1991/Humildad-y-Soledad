@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="Veinte">20dp</dimen>
+    <dimen name="Diez">10dp</dimen>
+    <dimen name="Cinco">5dp</dimen>
+    <dimen name="Ocho">8dp</dimen>
+    <dimen name="Quince">15dp</dimen>
+    <dimen name="doce">12dp</dimen>
+    <dimen name="treinta">30dp</dimen>
+</resources>
