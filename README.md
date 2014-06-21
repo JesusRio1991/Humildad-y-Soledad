@@ -1,4 +1,4 @@
-Humildad-y-Soledad
+Humildad y Soledad
 ==================
 
 El código está liberado bajo licencia Creative Commons, para que cualquiera pueda verlo, ojalá aprender algo, o usarlo
