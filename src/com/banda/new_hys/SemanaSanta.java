@@ -53,11 +53,9 @@ public class SemanaSanta extends Activity {
 				Intent intent = new Intent(SemanaSanta.this, Vista.class);
 				intent.putExtra("Data", meMap);
 				startActivity(intent);
-
-			}
-		});
-
-	}
+			} // onItemClick
+		}); // setOnItemClickListener
+	} // onCreate
 
 	public static List<Map<String, String>> getSemanaSanta(Context cxt,
 			int contador) {
@@ -67,24 +65,19 @@ public class SemanaSanta extends Activity {
 
 		try {
 			FileInputStream fil = cxt.openFileInput("SemanaSanta.xml");
-
 			// Creamos un nuevo parser DOM
 			DocumentBuilder builder = factory.newDocumentBuilder();
-
 			// Realizamos lalectura completa del XML
 			Document dom = builder.parse(fil);
-
-			// Nos posicionamos en el nodo principal del árbol (<rss>)
+			// Nos posicionamos en el nodo principal del ï¿½rbol (<rss>)
 			Element root = dom.getDocumentElement();
-
 			// Localizamos todos los elementos <item>
 			NodeList items = root.getElementsByTagName("item");
 
-			if (contador == 0) {
+			if (contador == 0)
 				contador = items.getLength();
-			} else if (items.getLength() < contador) {
+			else if (items.getLength() < contador)
 				contador = items.getLength();
-			}
 
 			for (int i = 0; i < contador; i++) {
 
@@ -101,50 +94,48 @@ public class SemanaSanta extends Activity {
 					Node dato = datosNoticia.item(j);
 					String etiqueta = dato.getNodeName();
 
-					if (etiqueta.equals("mensaje")) {
+					if ( etiqueta.equals("mensaje") )
 						datum.put("Mensaje", "" + obtenerTexto(dato));
-					}
-					if (etiqueta.equals("fecha")) {
+					
+					if ( etiqueta.equals("fecha") )
 						datum.put("Fecha", "" + obtenerTexto(dato));
-					}
-					if (etiqueta.equals("ciudad")) {
+
+					if ( etiqueta.equals("ciudad") )
 						datum.put("Ciudad", "" + obtenerTexto(dato));
-					}
-					if (etiqueta.equals("uniforme")) {
+					
+					if ( etiqueta.equals("uniforme") )
 						datum.put("Uniforme", "" + obtenerTexto(dato));
-					}
-					if (etiqueta.equals("horario")) {
+
+					if ( etiqueta.equals("horario") )
 						datum.put("Horario", "" + obtenerTexto(dato));
-					}
-					if (etiqueta.equals("quedadaR")) {
+
+					if ( etiqueta.equals("quedadaR") )
 						datum.put("QuedadaR", "" + obtenerTexto(dato));
-					}
-					if (etiqueta.equals("quedadaS")) {
+
+					if ( etiqueta.equals("quedadaS") )
 						datum.put("QuedadaS", "" + obtenerTexto(dato));
-					}
-					if (etiqueta.equals("img")) {
+
+					if ( etiqueta.equals("img") ) 
 						datum.put("Img", "" + obtenerTexto(dato));
-					}
-				}
+				} // for
 
 				data.add(datum);
-			}
+			} // for
 
 		} catch (Exception ex) {
 			Log.e("XmlTips", "Error al leer fichero XML.");
 		}
 
 		return data;
-	}
+	} // getSemanaSanta
 
 	private static String obtenerTexto(Node dato) {
 		StringBuilder texto = new StringBuilder();
 		NodeList fragmentos = dato.getChildNodes();
 
-		for (int k = 0; k < fragmentos.getLength(); k++) {
+		for (int k = 0; k < fragmentos.getLength(); k++)
 			texto.append(fragmentos.item(k).getNodeValue());
-		}
 
 		return texto.toString();
-	}
-}
+	} // obtenerTexto
+} // SemanaSanta

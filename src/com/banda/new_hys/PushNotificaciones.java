@@ -24,7 +24,7 @@ public class PushNotificaciones extends Activity {
 
 		Intent intent = getIntent();
 
-		if (intent.getExtras().getString("com.parse.Data") != null) {
+		if ( intent.getExtras().getString("com.parse.Data") != null ) {
 
 			try {
 				JSONObject json = new JSONObject(intent.getExtras().getString(
@@ -47,16 +47,14 @@ public class PushNotificaciones extends Activity {
 			} catch (JSONException e) {
 				Log.e(e.getMessage(), "Error al parsear JSON de parse.com");
 			}
+
 		} else {
 
 			HashMap<String, String> meMap = new HashMap<String, String>();
-
 			Bundle bundle = getIntent().getExtras();
 			meMap = (HashMap<String, String>) bundle.getSerializable("Mensaje");
-
 			TextView txt = (TextView) findViewById(R.id.NotificationVist);
 			txt.setText(meMap.get("Mensaje"));
-
-		}
-	}
-}
+		} // else
+	} // onCreate
+} // PushNotificaciones

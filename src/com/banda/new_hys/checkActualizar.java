@@ -17,50 +17,50 @@ import java.net.URL;
 public class checkActualizar {
  
     /**
-     * El enlace al archivo público de información de la versión. Puede ser de
+     * El enlace al archivo pï¿½blico de informaciï¿½n de la versiï¿½n. Puede ser de
      * Dropbox, un hosting propio o cualquier otro servicio similar.
      */
-    public static final String INFO_FILE = "https://dl.dropboxusercontent.com/u/15616448/checkHyS.txt";
+    private static final String INFO_FILE = "https://dl.dropboxusercontent.com/u/15616448/checkHyS.txt";
  
     /**
-     * El código de versión establecido en el AndroidManifest.xml de la versión
-     * instalada de la aplicación. Es el valor numérico que usa Android para
+     * El cï¿½digo de versiï¿½n establecido en el AndroidManifest.xml de la versiï¿½n
+     * instalada de la aplicaciï¿½n. Es el valor numï¿½rico que usa Android para
      * diferenciar las versiones.
      */
     private int currentVersionCode;
     /**
-     * El nombre de versión establecido en el AndroidManifest.xml de la versión
-     * instalada. Es la cadena de texto que se usa para identificar al versión
+     * El nombre de versiï¿½n establecido en el AndroidManifest.xml de la versiï¿½n
+     * instalada. Es la cadena de texto que se usa para identificar al versiï¿½n
      * de cara al usuario.
      */
     private String currentVersionName;
  
     /**
-     * El código de versión establecido en el AndroidManifest.xml de la última
-     * versión disponible de la aplicación.
+     * El cï¿½digo de versiï¿½n establecido en el AndroidManifest.xml de la ï¿½ltima
+     * versiï¿½n disponible de la aplicaciï¿½n.
      */
     private int latestVersionCode;
     /**
-     * El nombre de versión establecido en el AndroidManifest.xml de la última
-     * versión disponible.
+     * El nombre de versiï¿½n establecido en el AndroidManifest.xml de la ï¿½ltima
+     * versiï¿½n disponible.
      */
     private String latestVersionName;
  
     /**
-     * Enlace de descarga directa de la última versión disponible.
+     * Enlace de descarga directa de la ï¿½ltima versiï¿½n disponible.
      */
     private String downloadURL;
  
     /**
-     * Método para inicializar el objeto. Se debe llamar antes que a cualquie
+     * Mï¿½todo para inicializar el objeto. Se debe llamar antes que a cualquie
      * otro, y en un hilo propio (o un AsyncTask) para no bloquear al interfaz
      * ya que hace uso de Internet.
      *
      * @param context
-     *            El contexto de la aplicación, para obtener la información de
-     *            la versión actual.
+     *            El contexto de la aplicaciï¿½n, para obtener la informaciï¿½n de
+     *            la versiï¿½n actual.
      */
-    public void getData(Context context) {
+    void getData(Context context) {
         try{
             // Datos locales
             PackageInfo pckginfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
@@ -73,7 +73,7 @@ public class checkActualizar {
             latestVersionCode = json.getInt("versionCode");
             latestVersionName = json.getString("versionName");
             downloadURL = json.getString("downloadURL");
-            Log.d("AutoUpdate", "Datos obtenidos con éxito");
+            Log.d("AutoUpdate", "Datos obtenidos con ï¿½xito");
         }catch(JSONException e){
             Log.e("AutoUpdate", "Ha habido un error con el JSON", e);
         }catch(NameNotFoundException e){
@@ -81,64 +81,64 @@ public class checkActualizar {
         }catch(IOException e){
             Log.e("AutoUpdate", "Ha habido un error con la descarga", e);
         }
-    }
+    } // getData
  
     /**
-     * Método para comparar la versión actual con la última .
+     * Mï¿½todo para comparar la versiï¿½n actual con la ï¿½ltima .
      *
-     * @return true si hay una versión más nueva disponible que la actual.
+     * @return true si hay una versiï¿½n mï¿½s nueva disponible que la actual.
      */
-    public boolean isNewVersionAvailable() {
+    boolean isNewVersionAvailable() {
         return getLatestVersionCode() > getCurrentVersionCode();
     }
  
     /**
-     * Devuelve el código de versión actual.
+     * Devuelve el cï¿½digo de versiï¿½n actual.
      *
      * @return
      */
-    public int getCurrentVersionCode() {
+    int getCurrentVersionCode() {
         return currentVersionCode;
     }
  
     /**
-     * Devuelve el nombre de versión actual.
+     * Devuelve el nombre de versiï¿½n actual.
      *
      * @return
      */
-    public String getCurrentVersionName() {
+    String getCurrentVersionName() {
         return currentVersionName;
     }
  
     /**
-     * Devuelve el código de la última versión disponible.
+     * Devuelve el cï¿½digo de la ï¿½ltima versiï¿½n disponible.
      *
      * @return
      */
-    public int getLatestVersionCode() {
+    int getLatestVersionCode() {
         return latestVersionCode;
     }
  
     /**
-     * Devuelve el nombre de la última versión disponible.
+     * Devuelve el nombre de la ï¿½ltima versiï¿½n disponible.
      *
      * @return
      */
-    public String getLatestVersionName() {
+    String getLatestVersionName() {
         return latestVersionName;
     }
  
     /**
-     * Devuelve el enlace de descarga de la última versión disponible
+     * Devuelve el enlace de descarga de la ï¿½ltima versiï¿½n disponible
      *
      * @return
      */
-    public String getDownloadURL() {
+    String getDownloadURL() {
         return downloadURL;
     }
  
     /**
-     * Método auxiliar usado por getData() para leer el archivo de información.
+     * Mï¿½todo auxiliar usado por getData() para leer el archivo de informaciï¿½n.
      * Encargado de conectarse a la red, descargar el archivo y convertirlo a
      * String.
      *
@@ -146,10 +146,10 @@ public class checkActualizar {
      *            La URL del archivo que se quiere descargar.
      * @return Cadena de texto con el contenido del archivo
      * @throws IOException
-     *             Si hay algún problema en la conexión
+     *             Si hay algï¿½n problema en la conexiï¿½n
      */
     private static String downloadHttp(URL url) throws IOException {
-        HttpURLConnection c = (HttpURLConnection)url.openConnection();
+    	HttpURLConnection c = (HttpURLConnection)url.openConnection();
         c.setRequestMethod("GET");
         c.setReadTimeout(15 * 1000);
         c.setUseCaches(false);
@@ -157,9 +157,11 @@ public class checkActualizar {
         BufferedReader reader = new BufferedReader(new InputStreamReader(c.getInputStream()));
         StringBuilder stringBuilder = new StringBuilder();
         String line = null;
-        while((line = reader.readLine()) != null){
+        
+        while( (line = reader.readLine()) != null )
             stringBuilder.append(line + "\n");
-        }
+        
         return stringBuilder.toString();
-    }
-}
+    } // downloadHttp
+
+} // checkActualizar

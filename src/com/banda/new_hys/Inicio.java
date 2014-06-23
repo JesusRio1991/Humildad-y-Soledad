@@ -39,14 +39,13 @@ public class Inicio extends Activity {
 
 		// Forzar la salida a Internet a los Android 4.0+
 
-		if (android.os.Build.VERSION.SDK_INT > 9) {
+		if( android.os.Build.VERSION.SDK_INT > 9 ) {
 			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 					.permitAll().build();
 			StrictMode.setThreadPolicy(policy);
 		}
 
 		// Iniciamos el MainActivity cuando el tiempo haya acabado!
-
 		final TimerTask task = new TimerTask() {
 			@Override
 			public void run() {
@@ -54,12 +53,11 @@ public class Inicio extends Activity {
 						MainActivity.class);
 				startActivity(mainIntent);
 				finish();
-			}
-		};
+			} // run
+		}; // TimerTask
 
 		// Comprobamos en segundo plano si los archivos de Actuaciones y Semana
-		// Santa han cambiado, si es así los descargamos en local
-
+		// Santa han cambiado, si es asï¿½ los descargamos en local
 		new Thread(new Runnable() {
 			public void run() {
 
@@ -78,18 +76,17 @@ public class Inicio extends Activity {
 
 				comprobarSiExiste(urls, name);
 
-				// Iniciamos el la cuenta atrás para ir al MainActivity
-				
+				// Iniciamos el la cuenta atrï¿½s para ir al MainActivity
 				runOnUiThread(new Runnable() {
 					public void run() {
 						Timer timer = new Timer();
 						timer.schedule(task, splashDelay);
-					}
-				});
+					} // run
+				}); // Runnable
 			}
-		}).start();
+		}).start(); // Thread
 
-	}
+	} // onCreate
 
 	// Comprueba si el el archivo pasado por parametro ha cambiado en el
 	// servidor, si no, lo descarga
@@ -100,27 +97,22 @@ public class Inicio extends Activity {
 
 		File fileDateInt = new File(this.getFilesDir(), name + ".txt");
 
-		if (fileDateInt.exists()) {
+		if( fileDateInt.exists() ) {
 
 			String dateFileInt = ultimaVezDate(name);
 
-			if (dateFileWeb.toString().equals(dateFileInt)) {
-
-			} else {
-
+			if ( !dateFileWeb.toString().equals(dateFileInt)) {
 				fileDateInt.delete();
 				ultimaVezDateGuardar(name, dateFileWeb.toString());
 				DownloadFiles(urls, name);
-
-			}
+			} // if
 		} else {
-
 			fileDateInt.delete();
 			ultimaVezDateGuardar(name, dateFileWeb.toString());
 			DownloadFiles(urls, name);
-		}
+		} // else
 
-	}
+	} // comprobarSiExiste
 
 	// Guarda en un archivo la fecha de la ultima modificacion del archivo que
 	// esta en el servidor
@@ -138,7 +130,7 @@ public class Inicio extends Activity {
 			ex.printStackTrace();
 		}
 
-	}
+	} // ultimaVezDateGuardar
 
 	// Consulta la fecha alojada en el archivo interno de la aplicacion de la
 	// ultima vez que se modifico el archivo del servidor y devuelve la fecha
@@ -153,14 +145,14 @@ public class Inicio extends Activity {
 			char[] inputBuffer = new char[100];
 
 			int charRead;
-			while ((charRead = isr.read(inputBuffer)) > 0) {
+			while( (charRead = isr.read(inputBuffer)) > 0 ) {
 
 				String readString = String
 						.copyValueOf(inputBuffer, 0, charRead);
 				s += readString;
 
 				inputBuffer = new char[100];
-			}
+			} // while
 
 			isr.close();
 
@@ -168,27 +160,26 @@ public class Inicio extends Activity {
 			ex.printStackTrace();
 		}
 		return s;
-	}
+	} // ultimaVezDate
 
 	// Consulta la fecha de la ultima vez que el archivo del servidor fue
 	// modificado
 	public static long LastModified(String url) {
+		
 		HttpURLConnection.setFollowRedirects(false);
 		HttpURLConnection con = null;
 
 		try {
 			con = (HttpURLConnection) new URL(url).openConnection();
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		long date = con.getLastModified();
 
 		return date;
-	}
+	} // LastModified
 
 	// Descarga los archivos del servidor para alojarlos en local
 	@SuppressWarnings("static-access")
@@ -210,26 +201,22 @@ public class Inicio extends Activity {
 
 			fos = openFileOutput(name + ".xml", this.MODE_PRIVATE);
 
-			while ((count = is.read(data)) != -1) {
+			while( (count = is.read(data)) != -1 ) {
 				total += count;
 				int progress_temp = (int) total * 100 / lenghtOfFile;
-				if (progress_temp % 10 == 0 && progress != progress_temp) {
+				if( progress_temp % 10 == 0 && progress != progress_temp )
 					progress = progress_temp;
-				}
 				fos.write(data, 0, count);
-
-			}
+			} // while
+			
 			is.close();
 			fos.close();
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-}
+	} // DownloadFiles
+} // Inicio

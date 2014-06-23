@@ -35,6 +35,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -61,7 +62,6 @@ public class MainActivity extends Activity {
 		// -------------------------------------------------- //
 		// Forzar la salida a Internet en Android 4.0 +
 		// -------------------------------------------------- //
-
 		if (android.os.Build.VERSION.SDK_INT > 9) {
 			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 					.permitAll().build();
@@ -71,7 +71,6 @@ public class MainActivity extends Activity {
 		// -------------------------------------------------- //
 		// Adaptador y ListView para el apartado de NOTICIAS
 		// -------------------------------------------------- //
-
 		adapter = getAdapter();
 
 		final ListView listaUltimasNoticias = (ListView) findViewById(R.id.lstActuaciones);
@@ -86,14 +85,14 @@ public class MainActivity extends Activity {
 					@SuppressWarnings("unchecked")
 					public boolean onItemLongClick(AdapterView<?> arg0,
 							View arg1, final int pos, long id) {
-						// TODO Auto-generated method stub
+
 						final HashMap<String, String> meMap = (HashMap<String, String>) listaUltimasNoticias
 								.getItemAtPosition(pos);
 
 						AlertDialog.Builder adb = new AlertDialog.Builder(
 								MainActivity.this);
 
-						adb.setTitle("¿Desea eliminar este elemento?");
+						adb.setTitle("Â¿Desea eliminar este elemento?");
 						adb.setIcon(android.R.drawable.ic_dialog_alert);
 
 						adb.setPositiveButton("SI",
@@ -110,23 +109,21 @@ public class MainActivity extends Activity {
 												.setAdapter(getAdapter());
 										listaUltimasNoticias.invalidate();
 										adapter.notifyDataSetChanged();
-									}
-								});
+									} // onClick
+								}); // setPositiveButton
 
-						adb.setNegativeButton("NO",
+						// NO BORRAR
+						/*adb.setNegativeButton("NO",
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
 											int which) {
-
 									}
-								});
-
+								}); // setNegativeButton
+						*/
 						adb.show();
-
 						return true;
-
-					}
-				});
+					} // onItemLongClick
+				}); // setOnItemLongClickListener
 
 		listaUltimasNoticias.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> arg0, View arg1,
@@ -139,9 +136,8 @@ public class MainActivity extends Activity {
 						PushNotificaciones.class);
 				intent.putExtra("Mensaje", meMap);
 				startActivity(intent);
-
-			}
-		});
+			} // onItemClick
+		}); // setOnItemClickListener
 
 		// -------------------------------------------------- //
 		// Adaptador y ListView para el apartado de ACTUACIONES
@@ -154,6 +150,7 @@ public class MainActivity extends Activity {
 						R.id.txtFechaSemanaSanta });
 
 		final ListView listaUltimasActuaciones = (ListView) findViewById(R.id.lstUltimasActuaciones);
+		
 		listaUltimasActuaciones.setAdapter(adapter1);
 		updateListViewHeight(listaUltimasActuaciones);
 
@@ -170,8 +167,8 @@ public class MainActivity extends Activity {
 						intent.putExtra("Data", meMap);
 						startActivity(intent);
 
-					}
-				});
+					} // onItemClick
+				}); // setOnItemClickListener
 
 		// -------------------------------------------------- //
 		// Adaptador y ListView para el apartado de SEMANA SANTA
@@ -201,8 +198,8 @@ public class MainActivity extends Activity {
 						intent.putExtra("Data", meMap);
 						startActivity(intent);
 
-					}
-				});
+					} // onItemClick
+				}); // setOnItemClickListener
 
 		// -------------------------------------------------- //
 		// Adaptador y ListView para el apartado de LA WEB
@@ -229,11 +226,11 @@ public class MainActivity extends Activity {
 				startActivity(new Intent("android.intent.action.VIEW", Uri
 						.parse(Link)));
 
-			}
-		});
+			} // onItemClick
+		}); // setOnItemClickListener
 
 		dbAdapter.cerrar();
-	}
+	} // onCreate
 
 	// Se Obtiene los datos XML y se llama a ObtenerTexto para obtener el texto
 	public static List<Map<String, String>> getWeb(Context cxt, int contador) {
@@ -244,69 +241,56 @@ public class MainActivity extends Activity {
 		try {
 
 			FileInputStream fil = cxt.openFileInput("Feed.xml");
-
 			// Creamos un nuevo parser DOM
 			DocumentBuilder builder = factory.newDocumentBuilder();
-
 			// Realizamos lalectura completa del XML
 			Document dom = builder.parse(fil);
-
-			// Nos posicionamos en el nodo principal del árbol (<rss>)
+			// Nos posicionamos en el nodo principal del ï¿½rbol (<rss>)
 			Element root = dom.getDocumentElement();
-
 			// Localizamos todos los elementos <item>
 			NodeList items = root.getElementsByTagName("item");
 
-			if (contador == 0) {
+			if (contador == 0)
 				contador = items.getLength();
-			}
 
 			for (int i = 0; i < contador; i++) {
-
 				HashMap<String, String> datum = new HashMap<String, String>();
-
 				// Obtenemos la noticia actual
 				Node item = items.item(i);
-
 				// Obtenemos la lista de datos de la noticia actual
 				NodeList datosNoticia = item.getChildNodes();
-
 				// Procesamos cada dato de la noticia
 				for (int j = 0; j < datosNoticia.getLength(); j++) {
 					Node dato = datosNoticia.item(j);
 					String etiqueta = dato.getNodeName();
 
-					if (etiqueta.equals("title")) {
+					if ( etiqueta.equals("title") )
 						datum.put("Mensaje", "" + obtenerTexto(dato));
-					}
-					if (etiqueta.equals("link")) {
+
+					if ( etiqueta.equals("link") )
 						datum.put("Link", "" + obtenerTexto(dato));
-					}
-				}
+				} // for
 
 				data.add(datum);
-
-			}
+			} // for
 
 		} catch (Exception ex) {
 			Log.e("XmlTips", "Error al leer fichero XML.");
-
 		}
 
 		return data;
-	}
+	} // getWeb
 
 	// Se Obtiene el texto del XML
 	private static String obtenerTexto(Node dato) {
 		StringBuilder texto = new StringBuilder();
 		NodeList fragmentos = dato.getChildNodes();
 
-		for (int k = 0; k < fragmentos.getLength(); k++) {
+		for (int k = 0; k < fragmentos.getLength(); k++)
 			texto.append(fragmentos.item(k).getNodeValue());
-		}
 
 		return texto.toString();
-	}
+	} // obtenerTexto
 
 	// Actualiza la vista del ListView para poder ponerla dentro del ScrollView
 	public static void updateListViewHeight(ListView myListView) {
@@ -314,31 +298,30 @@ public class MainActivity extends Activity {
 		ListAdapter myListAdapter = myListView.getAdapter();
 		int totalHeight = 0;
 
-		if (myListAdapter == null) {
+		if (myListAdapter == null)
 			return;
-		}
 
 		for (int size = 0; size < myListAdapter.getCount(); size++) {
 			View listItem = myListAdapter.getView(size, null, myListView);
 			listItem.measure(0, 0);
 			totalHeight += listItem.getMeasuredHeight();
-		}
+		} // for
 
 		ViewGroup.LayoutParams params = myListView.getLayoutParams();
 		params.height = totalHeight
 				+ (myListView.getDividerHeight() * (myListAdapter.getCount() - 1));
 
 		myListView.setLayoutParams(params);
-	}
+	} // updateListViewHeight
 
-	// Crea el menú de la aplicación
+	// Crea el menï¿½ de la aplicaciï¿½n
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.menu, menu);
 		return true;
 	}
 
-	// Obtiene que item del menú ha sido seleccionado
+	// Obtiene que item del menï¿½ ha sido seleccionado
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -361,8 +344,8 @@ public class MainActivity extends Activity {
 
 		default:
 			return super.onOptionsItemSelected(item);
-		}
-	}
+		} // switch
+	} // onOptionsItemSelected
 
 	// Obtiene los datos de la aplicacion para actualizar
 	private Runnable backgroundDownload = new Runnable() {
@@ -370,27 +353,25 @@ public class MainActivity extends Activity {
 		public void run() {
 			mVC.getData(MainActivity.this);
 			handler.post(finishBackgroundDownload);
-		}
-	};
+		} // run
+	}; // Runnable
 
-	// Descarga la version actualizada o nos dice que ya está actualizada
+	// Descarga la version actualizada o nos dice que ya esta actualizada
 	private Runnable finishBackgroundDownload = new Runnable() {
 		@SuppressLint("ShowToast")
 		@Override
 		public void run() {
 			progressBar.dismiss();
 			if (mVC.isNewVersionAvailable()) {
-				// Hay una nueva versión disponible
+				// Hay una nueva version disponible
 				startActivity(new Intent("android.intent.action.VIEW",
 						Uri.parse(mVC.getDownloadURL())));
-
 			} else {
 				Toast.makeText(MainActivity.this,
-						"¡Tu aplicación está actualizada!", Toast.LENGTH_LONG)
+						"Â¡Tu aplicaciÃ³n estÃ¡ actualizada!", Toast.LENGTH_LONG)
 						.show();
-
-			}
-		}
+			} // else
+		} // run
 	};
 
 	// Intent a Actuaciones
@@ -419,7 +400,7 @@ public class MainActivity extends Activity {
 		dbAdapter.cerrar();
 
 		return data;
-	}
+	} // getData
 
 	public SimpleAdapter getAdapter() {
 
@@ -432,8 +413,6 @@ public class MainActivity extends Activity {
 				R.layout.list_item_ultimasnoticias, new String[] { "Mensaje",
 						"Hora" }, new int[] { R.id.txtVista,
 						R.id.txtFechaSemanaSanta });
-
 		return adapter;
-
-	}
-}
+	} // getAdapter 
+} // MainActivity

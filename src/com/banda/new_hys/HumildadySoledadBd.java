@@ -11,7 +11,7 @@ public class HumildadySoledadBd extends SQLiteOpenHelper {
 	private static String name = "HySbd";
 	private static CursorFactory factory = null;
 
-	public HumildadySoledadBd(Context context) {
+	HumildadySoledadBd(Context context) {
 		super(context, name, factory, version);
 	}
 
@@ -28,16 +28,17 @@ public class HumildadySoledadBd extends SQLiteOpenHelper {
 		/*
 		 * Insertamos datos iniciales
 		 */
-		db.execSQL("INSERT INTO HYS (_id,hip_notificacion) VALUES(0,'Bienvenido a la v2.0 de la aplicaciÛn oficial de Humildad y Soledad')");
-		db.execSQL("INSERT INTO HYS (_id,hip_notificacion) VALUES(1,'Esta es la primera noticia, aparecer· al instalar la aplicaciÛn, si la dejas pulsada podr·s borrarla o compartirla')");
+		db.execSQL("INSERT INTO HYS (_id,hip_notificacion) VALUES(0,'Bienvenido a la v2.0 de la aplicaci√≥n oficial de Humildad y Soledad')");
+		db.execSQL("INSERT INTO HYS (_id,hip_notificacion) VALUES(1,'Esta es la primera noticia, aparecer√° al instalar la aplicaci√≥n, si la dejas pulsada podr√°s borrarla o compartirla')");
 
 		// Log.i(this.getClass().toString(), "Datos iniciales HYS insertados");
 
 		// Log.i(this.getClass().toString(), "Base de datos creada");
-	}
+	} // onCreate
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		
+	} // onUpgrade
 
-	}
-}
+} // HumildadySoledadBd

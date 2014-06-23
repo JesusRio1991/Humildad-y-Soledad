@@ -80,22 +80,21 @@ public class Vista extends Activity {
 
 		final String Img = meMap.get("Img");
 
-		if (Img.equals(" ")) {
-
-			Toast.makeText(Vista.this, "¡No hay imagen!", Toast.LENGTH_LONG)
-					.show();
-		} else {
+		if ( Img.equals(" ") )
+			Toast.makeText(Vista.this, "ï¿½No hay imagen!", Toast.LENGTH_LONG).show();
+		else {
 
 			new Thread(new Runnable() {
 				public void run() {
+					
 					final ImageView imageView = (ImageView) findViewById(R.id.imageVista);
 					final ProgressBar pgb = (ProgressBar) findViewById(R.id.progressBar1);
 					pgb.setVisibility(View.VISIBLE);
 					URL req = null;
+					
 					try {
 						req = new URL(Img);
 					} catch (MalformedURLException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 
@@ -115,19 +114,19 @@ public class Vista extends Activity {
 
 								imageView.setImageBitmap(mIcon_val);
 								pgb.setVisibility(View.INVISIBLE);
-							}
-						}));
+							} // run
+						})); // post
 
 					} catch (IOException e) {
 						Toast.makeText(Vista.this,
-								"¡No se ha podido cargar la imagen!",
+								"Â¡No se ha podido cargar la imagen!",
 								Toast.LENGTH_LONG).show();
-					}
+					} // catch
+				} // run
+			}).start(); // Thread
 
-				}
-			}).start();
+		} // else
 
-		}
+	} // onCreate
 
-	}
-}
+} // Vista

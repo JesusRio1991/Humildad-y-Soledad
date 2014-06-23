@@ -6,9 +6,6 @@ import com.parse.PushService;
 
 public class Application extends android.app.Application {
 
-	public Application() {
-	}
-
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -22,5 +19,6 @@ public class Application extends android.app.Application {
 		
 		//Guardar en BackGround
 		ParseInstallation.getCurrentInstallation().saveInBackground();
-	}
-}
+		
+	} // onCreate
+} // Application

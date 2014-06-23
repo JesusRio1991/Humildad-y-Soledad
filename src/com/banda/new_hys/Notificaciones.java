@@ -50,7 +50,7 @@ public class Notificaciones extends Activity {
 						AlertDialog.Builder adb = new AlertDialog.Builder(
 								Notificaciones.this);
 
-						adb.setTitle("¿Desea eliminar este elemento?");
+						adb.setTitle("Â¿Desea eliminar este elemento?");
 						adb.setIcon(android.R.drawable.ic_dialog_alert);
 
 						adb.setPositiveButton("SI",
@@ -66,23 +66,21 @@ public class Notificaciones extends Activity {
 										listaUltimasNoticias.invalidate();
 										adapter.notifyDataSetChanged();
 
-									}
-								});
+									} // onClick
+								}); // OnClickListener
 
-						adb.setNegativeButton("NO",
+						/*adb.setNegativeButton("NO",
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
 											int which) {
 
 									}
-								});
+								});*/
 
 						adb.show();
-
 						return true;
-
-					}
-				});
+					} // onItemLongClick
+				}); // setOnItemLongClickListener
 
 		listaUltimasNoticias.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> arg0, View arg1,
@@ -95,30 +93,25 @@ public class Notificaciones extends Activity {
 						PushNotificaciones.class);
 				intent.putExtra("Mensaje", meMap);
 				startActivity(intent);
-
-			}
-		});
+			} // onItemClick
+		}); // setOnItemClickListener
 		
 		dbAdapter.cerrar();
-	}
+	} // onCreate
 
 	public List<Map<String, String>> getData() {
 		
 		dbAdapter.abrir();
 		data = dbAdapter.getCursor("Todos");
-
 		return data;
-	}
+	} // getData
 	
 	public SimpleAdapter getAdapter(){
-		
 		
 		final SimpleAdapter adapter = new SimpleAdapter(this, getData(),
 				R.layout.list_item_ultimasnoticias, new String[] { "Mensaje",
 						"Hora" }, new int[] { R.id.txtVista,
 						R.id.txtFechaSemanaSanta });
-		
 		return adapter;
-		
-	}
+	} // getAdapter
 }

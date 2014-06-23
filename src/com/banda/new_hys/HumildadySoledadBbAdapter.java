@@ -22,14 +22,14 @@ public class HumildadySoledadBbAdapter {
 	/**
 	 * Definimos constante con el nombre de la tabla
 	 */
-	public static final String C_TABLA = "HYS";
+	static final String C_TABLA = "HYS";
 
 	/**
 	 * Definimos constantes con el nombre de las columnas de la tabla
 	 */
-	public static final String C_COLUMNA_ID = "_id";
-	public static final String C_COLUMNA_ALERTA = "hip_notificacion";
-	public static final String C_COLUMNA_FECHA = "hip_fecha";
+	static final String C_COLUMNA_ID = "_id";
+	static final String C_COLUMNA_ALERTA = "hip_notificacion";
+	static final String C_COLUMNA_FECHA = "hip_fecha";
 
 	private static Context contexto;
 	private static HumildadySoledadBd dbHelper;
@@ -42,17 +42,17 @@ public class HumildadySoledadBbAdapter {
 	private static String[] columnas = new String[] { C_COLUMNA_ID,
 			C_COLUMNA_ALERTA, C_COLUMNA_FECHA };
 
-	public HumildadySoledadBbAdapter(Context context) {
+	HumildadySoledadBbAdapter(Context context) {
 		HumildadySoledadBbAdapter.contexto = context;
 	}
 
-	public HumildadySoledadBbAdapter abrir() throws SQLException {
+	HumildadySoledadBbAdapter abrir() throws SQLException {
 		dbHelper = new HumildadySoledadBd(contexto);
 		db = dbHelper.getWritableDatabase();
 		return this;
 	}
 
-	public void cerrar() {
+	void cerrar() {
 		dbHelper.close();
 		db.close();
 	}
@@ -61,17 +61,16 @@ public class HumildadySoledadBbAdapter {
 	 * Devuelve cursor con todos las columnas de la tabla
 	 */
 	@SuppressLint("SimpleDateFormat")
-	public ArrayList<Map<String, String>> getCursor(String howMuch)
+	ArrayList<Map<String, String>> getCursor(String howMuch)
 			throws SQLException {
 
-		if (db == null)
+		if( db == null )
 			abrir();
 
 		ArrayList<Map<String, String>> data = new ArrayList<Map<String, String>>();
 
-		if (howMuch.equals("Todos")) {
+		if( howMuch.equals("Todos") )
 			howMuch = null;
-		}
 
 		Cursor c = db.query(true, C_TABLA, columnas, null, null, null, null,
 				C_COLUMNA_ID + " DESC", howMuch);
@@ -91,25 +90,23 @@ public class HumildadySoledadBbAdapter {
 		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		String formatteDate = df.format(date);
 
-		for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
+		for( c.moveToFirst(); !c.isAfterLast(); c.moveToNext() ) {
 			HashMap<String, String> datum = new HashMap<String, String>();
 			datum.put("Mensaje", "" + c.getString(id));
 
 			try {
 				parsed = _inputFormat.parse(c.getString(fecha));
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
-			if (_outputFormat.format(parsed).equals(formatteDate)) {
+			if ( _outputFormat.format(parsed).equals(formatteDate) )
 				datum.put("Hora", "" + "Hoy");
-			} else {
+			else
 				datum.put("Hora", "" + _outputFormat.format(parsed));
-			}
 
 			data.add(datum);
-		}
+		} // for
 
 		c.close();
 
@@ -117,19 +114,20 @@ public class HumildadySoledadBbAdapter {
 			cerrar();
 
 		return data;
-	}
+	} // getCursor
 
-	public long insert(ContentValues reg) {
+	long insert(ContentValues reg) {
 		if (db == null)
 			abrir();
 
 		return db.insert(C_TABLA, null, reg);
-	}
+	} // insert
 
-	public boolean delete(String name) {
+	boolean delete(String name) {
 		if (db == null)
 			abrir();
 
 		return db.delete(C_TABLA, C_COLUMNA_ALERTA + "='" + name + "'", null) > 0;
-	}
-}
+	} // delete
+
+} // HumildadySoledadBbAdapter
