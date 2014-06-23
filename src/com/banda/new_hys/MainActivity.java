@@ -93,7 +93,8 @@ public class MainActivity extends Activity {
 						AlertDialog.Builder adb = new AlertDialog.Builder(
 								MainActivity.this);
 
-						adb.setTitle("¿Desea eliminar este elemento?");
+						adb.setTitle("Borrar elemento");
+						adb.setMessage("¿Desea eliminar este elemento?");
 						adb.setIcon(android.R.drawable.ic_dialog_alert);
 
 						adb.setPositiveButton("SI",
@@ -405,7 +406,7 @@ public class MainActivity extends Activity {
 		startActivity(intent);
 	}
 
-	// Intente a Semana Santa
+	// Intent a Semana Santa
 	public void goSemanaSanta(View view) {
 		Intent intent = new Intent(MainActivity.this, SemanaSanta.class);
 		startActivity(intent);

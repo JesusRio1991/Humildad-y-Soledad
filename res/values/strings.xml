@@ -23,5 +23,7 @@
     <string name="QuedadaS">QUEDADA EN SANTAELLA</string>
     <string name="title_activity_notificaciones">Notificaciones</string>
     <string name="ultimaNoticia">ÚLTIMA NOTIFICACIÓN</string>
+    <string name="borrar">Borrar</string>
+    <string name="compartir">Compartir</string>
 
 </resources>

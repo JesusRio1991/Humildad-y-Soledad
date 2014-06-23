@@ -49,8 +49,8 @@ public class Notificaciones extends Activity {
 
 						AlertDialog.Builder adb = new AlertDialog.Builder(
 								Notificaciones.this);
-
-						adb.setTitle("¿Desea eliminar este elemento?");
+						adb.setTitle("Borrar elemento");
+						adb.setMessage("¿Desea eliminar este elemento?");
 						adb.setIcon(android.R.drawable.ic_dialog_alert);
 
 						adb.setPositiveButton("SI",

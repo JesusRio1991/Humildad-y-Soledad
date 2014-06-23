@@ -68,7 +68,7 @@
                 android:layout_height="0dp"
                 android:layout_marginLeft="@dimen/Diez"
                 android:layout_marginRight="@dimen/Diez"
-                android:layout_weight="1"
+                android:layout_weight="0.54"
                 android:background="@drawable/borderlistview"
                 android:divider="#DFDEDE"
                 android:dividerHeight="2sp"
