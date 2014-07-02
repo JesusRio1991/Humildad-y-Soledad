@@ -39,7 +39,6 @@ public class Inicio extends Activity {
 			finish();
 		} // run
 	}; // TimerTask
-	private String urls, name;
 
 	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	@SuppressLint("NewApi")
@@ -55,37 +54,29 @@ public class Inicio extends Activity {
 			StrictMode.setThreadPolicy(policy);
 		}
 
+		checkServer();
+
+	} // onCreate
+
+	private void checkServer() {
 		// Comprobamos en segundo plano si los archivos de Actuaciones y Semana
-		// Santa han cambiado, si es as� los descargamos en local
-		new Thread(new Runnable() {
+		// Santa han cambiado, si es asi los descargamos en local
+		new Thread( new Runnable() {
 			public void run() {
+				comprobarSiExiste("http://humildadysoledad.es/APP/actuaciones.xml", "Actuaciones");
+				comprobarSiExiste("http://humildadysoledad.es/APP/ss.xml", "SemanaSanta");
+				comprobarSiExiste("http://humildadysoledad.es/feed/", "Feed");
 
-				urls = "http://humildadysoledad.es/APP/actuaciones.xml";
-				name = "Actuaciones";
-
-				comprobarSiExiste(urls, name);
-
-				urls = "http://humildadysoledad.es/APP/ss.xml";
-				name = "SemanaSanta";
-
-				comprobarSiExiste(urls, name);
-
-				urls = "http://humildadysoledad.es/feed/";
-				name = "Feed";
-
-				comprobarSiExiste(urls, name);
-
-				// Iniciamos el la cuenta atr�s para ir al MainActivity
+				// Iniciamos el la cuenta atras para ir al MainActivity
 				runOnUiThread(new Runnable() {
 					public void run() {
 						Timer timer = new Timer();
 						timer.schedule(task, splashDelay);
 					} // run
 				}); // Runnable
-			}
+			} // run
 		}).start(); // Thread
-
-	} // onCreate
+	} // checkServer
 
 	// Comprueba si el el archivo pasado por parametro ha cambiado en el
 	// servidor, si no, lo descarga
