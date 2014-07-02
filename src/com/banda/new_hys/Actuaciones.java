@@ -29,15 +29,20 @@ public class Actuaciones extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_actuaciones);
 
 		// Creamos el adaptador para el ListView llamando a la funcion
 		// getActuaciones
-		SimpleAdapter adapter = new SimpleAdapter(this,
-				getActuaciones(this, 0), R.layout.list_item_ultimasactuaciones,
-				new String[] { "Mensaje", "Fecha" }, new int[] { R.id.txtVista,
-						R.id.txtFechaSemanaSanta });
+		SimpleAdapter adapter = new SimpleAdapter(
+				this,
+				getActuaciones(this, 0),
+				R.layout.list_item_ultimasactuaciones,
+				new String[] { "Mensaje", "Fecha" },
+				new int[] { R.id.txtVista,
+				R.id.txtFechaSemanaSanta }
+		);
 
 		// Rellenamos el ListView de Actuaciones con el adaptador creado
 		final ListView listaActuaciones = (ListView) findViewById(R.id.lstActuaciones);
@@ -90,9 +95,8 @@ public class Actuaciones extends Activity {
 
 			if (contador == 0)
 				contador = items.getLength();
-			else if (items.getLength() < contador) {
+			else if (items.getLength() < contador)
 				contador = items.getLength();
-			}
 
 			for (int i = 0; i < contador; i++) {
 

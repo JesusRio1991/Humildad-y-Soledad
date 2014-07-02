@@ -29,6 +29,17 @@ import android.os.StrictMode;
 public class Inicio extends Activity {
 
 	private long splashDelay = 1000; // 1 segundo ( 1000 milisegundos )
+	// Iniciamos el MainActivity cuando el tiempo haya acabado!
+	private final TimerTask task = new TimerTask() {
+		@Override
+		public void run() {
+			Intent mainIntent = new Intent().setClass(Inicio.this,
+					MainActivity.class);
+			startActivity(mainIntent);
+			finish();
+		} // run
+	}; // TimerTask
+	private String urls, name;
 
 	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	@SuppressLint("NewApi")
@@ -38,31 +49,19 @@ public class Inicio extends Activity {
 		setContentView(R.layout.activity_inicio);
 
 		// Forzar la salida a Internet a los Android 4.0+
-
 		if( android.os.Build.VERSION.SDK_INT > 9 ) {
 			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 					.permitAll().build();
 			StrictMode.setThreadPolicy(policy);
 		}
 
-		// Iniciamos el MainActivity cuando el tiempo haya acabado!
-		final TimerTask task = new TimerTask() {
-			@Override
-			public void run() {
-				Intent mainIntent = new Intent().setClass(Inicio.this,
-						MainActivity.class);
-				startActivity(mainIntent);
-				finish();
-			} // run
-		}; // TimerTask
-
 		// Comprobamos en segundo plano si los archivos de Actuaciones y Semana
 		// Santa han cambiado, si es as� los descargamos en local
 		new Thread(new Runnable() {
 			public void run() {
 
-				String urls = "http://humildadysoledad.es/APP/actuaciones.xml";
-				String name = "Actuaciones";
+				urls = "http://humildadysoledad.es/APP/actuaciones.xml";
+				name = "Actuaciones";
 
 				comprobarSiExiste(urls, name);
 
@@ -90,7 +89,7 @@ public class Inicio extends Activity {
 
 	// Comprueba si el el archivo pasado por parametro ha cambiado en el
 	// servidor, si no, lo descarga
-	public void comprobarSiExiste(String urls, String name) {
+	private void comprobarSiExiste(String urls, String name) {
 
 		long longDateFileWeb = LastModified(urls);
 		Date dateFileWeb = new Date(longDateFileWeb);
@@ -98,9 +97,7 @@ public class Inicio extends Activity {
 		File fileDateInt = new File(this.getFilesDir(), name + ".txt");
 
 		if( fileDateInt.exists() ) {
-
 			String dateFileInt = ultimaVezDate(name);
-
 			if ( !dateFileWeb.toString().equals(dateFileInt)) {
 				fileDateInt.delete();
 				ultimaVezDateGuardar(name, dateFileWeb.toString());
@@ -116,7 +113,7 @@ public class Inicio extends Activity {
 
 	// Guarda en un archivo la fecha de la ultima modificacion del archivo que
 	// esta en el servidor
-	public void ultimaVezDateGuardar(String name, String dateFile) {
+	private void ultimaVezDateGuardar(String name, String dateFile) {
 
 		try {
 			FileOutputStream fos = openFileOutput(name + ".txt", MODE_PRIVATE);
@@ -134,7 +131,7 @@ public class Inicio extends Activity {
 
 	// Consulta la fecha alojada en el archivo interno de la aplicacion de la
 	// ultima vez que se modifico el archivo del servidor y devuelve la fecha
-	public String ultimaVezDate(String ultimaVez) {
+	private String ultimaVezDate(String ultimaVez) {
 
 		String s = "";
 
@@ -164,7 +161,7 @@ public class Inicio extends Activity {
 
 	// Consulta la fecha de la ultima vez que el archivo del servidor fue
 	// modificado
-	public static long LastModified(String url) {
+	private static long LastModified(String url) {
 		
 		HttpURLConnection.setFollowRedirects(false);
 		HttpURLConnection con = null;
@@ -183,7 +180,7 @@ public class Inicio extends Activity {
 
 	// Descarga los archivos del servidor para alojarlos en local
 	@SuppressWarnings("static-access")
-	public void DownloadFiles(String urls, String name) {
+	private void DownloadFiles(String urls, String name) {
 
 		try {
 			URL url = new URL(urls);
